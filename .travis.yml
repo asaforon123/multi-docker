@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t asaforon/react-test -f ./client/Dockerfile.dev ./clinet
+
+script:
+  - docker run asaforon/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t asaforon/multi-client ./client
+  - docker build -t asaforon/multi-nginx ./nginx
+  - docker build -t asaforon/multi-server ./server
+  - docker build -t asaforon/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  # Take those images and push to docker hub
+  - docker push asaforon/multi-client
+  - docker push -t asaforon/multi-nginx
+  - docker push -t asaforon/multi-server
+  - docker push -t asaforon/multi-worker
