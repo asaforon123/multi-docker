@@ -5,10 +5,6 @@ services:
 before_install:
   - docker build -t asaforon/react-test -f ./client/Dockerfile.dev ./client
 
-script:
-  - docker run asaforon/react-test npm test -- --coverage
-  - docker stop asaforon/react-test
-
 after_success:
   - docker build -t asaforon/multi-client ./client
   - docker build -t asaforon/multi-nginx ./nginx
