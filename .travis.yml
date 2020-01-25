@@ -7,6 +7,7 @@ before_install:
 
 script:
   - docker run asaforon/react-test npm test -- --coverage
+  - docker stop asaforon/react-test
 
 after_success:
   - docker build -t asaforon/multi-client ./client
