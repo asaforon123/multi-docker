@@ -10,13 +10,13 @@ script:
 
 after_success:
   - docker build -t oronasaf123/multi-client ./client
-  - docker build -t oronasaf123/multi-nginx ./nginx
-  - docker build -t oronasaf123/multi-server ./server
-  - docker build -t oronasaf123/multi-worker ./worker
+  #- docker build -t oronasaf123/multi-nginx ./nginx
+  #- docker build -t oronasaf123/multi-server ./server
+  #- docker build -t oronasaf123/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push oronasaf123/multi-client
-  - docker push oronasaf123/multi-nginx
-  - docker push oronasaf123/multi-server
-  - docker push oronasaf123/multi-worker
+  #- docker push oronasaf123/multi-nginx
+  #- docker push oronasaf123/multi-server
+  #- docker push oronasaf123/multi-worker
